@@ -26,6 +26,7 @@ import {
   EuiHorizontalRule,
   EuiButtonIcon,
   EuiLink,
+  EuiCompressedRadioGroup,
 } from "@elastic/eui";
 import React, { ChangeEvent, Component, useContext } from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -582,7 +583,7 @@ export class CreateSnapshotPolicy extends MDSEnabledComponent<CreateSMPolicyProp
           </>
         )}
 
-        <ContentPanel title="Policy settings" titleSize="m">
+        <ContentPanel title="Policy settings" titleSize="s">
           <CustomLabel title="Policy name" />
           <EuiFormRow isInvalid={!!policyIdError} error={policyIdError}>
             <EuiFieldText placeholder="e.g. daily-snapshot" value={policyId} onChange={this.onChangePolicyName} disabled={isEdit} />
@@ -604,7 +605,7 @@ export class CreateSnapshotPolicy extends MDSEnabledComponent<CreateSMPolicyProp
 
         <EuiSpacer />
 
-        <ContentPanel title="Source and destination" titleSize="m">
+        <ContentPanel title="Source and destination" titleSize="s">
           <SnapshotIndicesRepoInput
             indexOptions={indexOptions}
             selectedIndexOptions={selectedIndexOptions}
@@ -629,7 +630,7 @@ export class CreateSnapshotPolicy extends MDSEnabledComponent<CreateSMPolicyProp
 
         <EuiSpacer />
 
-        <ContentPanel title="Snapshot schedule" titleSize="m">
+        <ContentPanel title="Snapshot schedule" titleSize="s">
           <CronSchedule
             frequencyTitle="Snapshot frequency"
             frequencyType={creationScheduleFrequencyType}
@@ -656,8 +657,8 @@ export class CreateSnapshotPolicy extends MDSEnabledComponent<CreateSMPolicyProp
 
         <EuiSpacer />
 
-        <ContentPanel title="Retention period" titleSize="m">
-          <EuiRadioGroup
+        <ContentPanel title="Retention period" titleSize="s">
+          <EuiCompressedRadioGroup
             options={rententionEnableRadios}
             idSelected={deleteConditionEnabled ? "retention_enabled" : "retention_disabled"}
             onChange={(id) => {
@@ -754,7 +755,7 @@ export class CreateSnapshotPolicy extends MDSEnabledComponent<CreateSMPolicyProp
 
         <EuiSpacer />
 
-        <ContentPanel title="Notifications" titleSize="m">
+        <ContentPanel title="Notifications" titleSize="s">
           <div style={{ padding: "10px 10px" }}>
             <EuiText>Notify on snapshot activities</EuiText>
 
@@ -817,10 +818,10 @@ export class CreateSnapshotPolicy extends MDSEnabledComponent<CreateSMPolicyProp
               />
             </EuiFlexItem>
             <EuiFlexItem grow={false}>
-              <EuiTitle size="m">
-                <h3>
+              <EuiTitle size="s">
+                <h1>
                   Advanced settings <i>– optional</i>
-                </h3>
+                </h1>
               </EuiTitle>
             </EuiFlexItem>
           </EuiFlexGroup>

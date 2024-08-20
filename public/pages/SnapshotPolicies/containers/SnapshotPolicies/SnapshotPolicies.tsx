@@ -31,6 +31,7 @@ import {
   EuiFlexGroup,
   EuiButtonIcon,
   EuiCompressedFieldSearch,
+  EuiSmallButton,
 } from "@elastic/eui";
 import { BREADCRUMBS, PLUGIN_NAME, ROUTES, SNAPSHOT_MANAGEMENT_DOCUMENTATION_URL } from "../../../../utils/constants";
 import { getMessagePrompt, getSMPoliciesQueryParamsFromURL, renderTimestampMillis } from "../../helpers";
@@ -387,7 +388,6 @@ export class SnapshotPolicies extends MDSEnabledComponent<SnapshotPoliciesProps,
     const popoverActionItems = [
       <EuiContextMenuItem
         key="Edit"
-        icon="empty"
         disabled={selectedItems.length != 1}
         data-test-subj="editButton"
         onClick={() => {
@@ -399,7 +399,6 @@ export class SnapshotPolicies extends MDSEnabledComponent<SnapshotPoliciesProps,
       </EuiContextMenuItem>,
       <EuiContextMenuItem
         key="Delete"
-        icon="empty"
         disabled={!selectedItems.length}
         data-test-subj="deleteButton"
         onClick={() => {
@@ -407,7 +406,7 @@ export class SnapshotPolicies extends MDSEnabledComponent<SnapshotPoliciesProps,
           this.showDeleteModal();
         }}
       >
-        <EuiTextColor color="danger">Delete</EuiTextColor>
+        <EuiTextColor>Delete</EuiTextColor>
       </EuiContextMenuItem>,
     ];
 
@@ -450,20 +449,19 @@ export class SnapshotPolicies extends MDSEnabledComponent<SnapshotPoliciesProps,
           this.showDeleteModal();
         }}
       >
-        <EuiTextColor color="danger">Delete</EuiTextColor>
+        <EuiTextColor>Delete</EuiTextColor>
       </EuiContextMenuItem>,
     ];
     const actionsButton = (
-      <EuiButton
+      <EuiSmallButton
         iconType="arrowDown"
         iconSide="right"
         disabled={!selectedItems.length}
         onClick={this.onActionButtonClick}
         data-test-subj="actionButton"
-        size="s"
       >
         Actions
-      </EuiButton>
+      </EuiSmallButton>
     );
     const actions = [
       <EuiButton iconType="refresh" onClick={this.getPolicies} data-test-subj="refreshButton">
@@ -480,11 +478,11 @@ export class SnapshotPolicies extends MDSEnabledComponent<SnapshotPoliciesProps,
         button={actionsButton}
         isOpen={isPopoverOpen}
         closePopover={this.closePopover}
-        panelPaddingSize="none"
+        panelPaddingSize="s"
         anchorPosition="downLeft"
         data-test-subj="actionPopover"
       >
-        <EuiContextMenuPanel items={popoverActionItems} />
+        <EuiContextMenuPanel items={popoverActionItems} size="s" />
       </EuiPopover>,
       <EuiButton onClick={this.onClickCreate} fill={true}>
         Create policy
@@ -506,7 +504,7 @@ export class SnapshotPolicies extends MDSEnabledComponent<SnapshotPoliciesProps,
       <EuiEmptyPrompt
         style={{ maxWidth: "45em" }}
         body={
-          <EuiText>
+          <EuiText size="s">
             <p>{getMessagePrompt(loadingPolicies)}</p>
           </EuiText>
         }
@@ -543,6 +541,8 @@ export class SnapshotPolicies extends MDSEnabledComponent<SnapshotPoliciesProps,
         controlType: "button",
       },
     ];
+
+    const searchbar_padding = { padding: "0px 0px 16px 0px" };
 
     const CommonTable = () => {
       return (
@@ -587,7 +587,7 @@ export class SnapshotPolicies extends MDSEnabledComponent<SnapshotPoliciesProps,
         <HeaderControl setMountPoint={setAppRightControls} controls={controlControlsData} />
         <HeaderControl setMountPoint={setAppDescriptionControls} controls={descriptionData} />
         <ContentPanel>
-          <EuiFlexGroup gutterSize="s" alignItems="center">
+          <EuiFlexGroup gutterSize="s" alignItems="center" style={searchbar_padding}>
             <EuiFlexItem grow={true}>
               <EuiCompressedFieldSearch
                 autoFocus
@@ -608,8 +608,9 @@ export class SnapshotPolicies extends MDSEnabledComponent<SnapshotPoliciesProps,
                 isOpen={isPopoverOpen}
                 closePopover={this.closePopover}
                 anchorPosition="downRight"
+                panelPaddingSize="s"
               >
-                <EuiContextMenuPanel items={popoverActionItemsNew} />
+                <EuiContextMenuPanel items={popoverActionItemsNew} size="s" />
               </EuiPopover>
             </EuiFlexItem>
           </EuiFlexGroup>
